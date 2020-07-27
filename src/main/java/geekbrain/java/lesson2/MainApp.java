@@ -1,12 +1,6 @@
 package geekbrain.java.lesson2;
 
-import geekbrain.java.lesson2.entity.Bucket;
-import geekbrain.java.lesson2.entity.Buyer;
-import geekbrain.java.lesson2.entity.Product;
-
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -16,9 +10,7 @@ public class MainApp {
         EntityManager em = null;
         try {
             em = MyFactory.getEntityManager();
-            Dao dao = new Dao(em);
-            MainApp.init(dao);
-            MainApp.start(dao, MyFactory.getScanner(), MyFactory.getPrinter());
+            MainApp.start(new Dao(em), MyFactory.getScanner(), MyFactory.getPrinter());
         } finally {
             if (em != null) {
                 em.close();
@@ -47,26 +39,5 @@ public class MainApp {
                 break;
             }
         }
-    }
-
-    public static void init(Dao dao) {
-        Buyer a = new Buyer("A");
-        Buyer b = new Buyer("B");
-        Buyer c = new Buyer("C");
-        Product z = new Product("A", 10);
-        Product x = new Product("B", 20);
-        Product y = new Product("C", 30);
-        dao.insertBuyer(a);
-        dao.insertBuyer(b);
-        dao.insertBuyer(c);
-        dao.insertProduct(z);
-        dao.insertProduct(x);
-        dao.insertProduct(y);
-        dao.insertBucket(new Bucket(a, z, z.getPresentValue()));
-        dao.insertBucket(new Bucket(a, x, x.getPresentValue()));
-        dao.insertBucket(new Bucket(a, y, y.getPresentValue()));
-        dao.insertBucket(new Bucket(b, z, z.getPresentValue()));
-        dao.insertBucket(new Bucket(b, x, x.getPresentValue()));
-        dao.insertBucket(new Bucket(c, z, z.getPresentValue()));
     }
 }
