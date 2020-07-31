@@ -6,7 +6,11 @@
 
     <groupId>geekbrains.vtb.web</groupId>
     <artifactId>web-development</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>jee-app</module>
+    </modules>
 
     <properties>
         <maven.compiler.target>11</maven.compiler.target>
